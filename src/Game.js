@@ -16,13 +16,25 @@ class Game extends React.Component {
 
     makeEmptyBoard() {
         let board = [];
-        for(var i = 0; i <= this.rows; i++) {
+        for(var i = 0; i < this.rows; i++) {
             board[i] = [];
-            for(var j = 0; j <= this.columns; j++) {
+            for(var j = 0; j < this.columns; j++) {
                 board[i][j] = false;
             }
         }
         return board
+    }
+
+    makeCells() {
+        let cells = []
+        for(var i = 0; i < this.rows; i++){
+            for (var j = 0; j < this.columns; j++ ) {
+                if(this.board[i][j]) {
+                    cells.push({i, j});
+                }
+            }
+        }
+        return cells;
     }
 
     render() {
