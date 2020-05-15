@@ -18,10 +18,15 @@ class Game extends React.Component {
 
     startGame = () => {
         this.setState({ isRunning: true })
+        this.runIteration(); 
     }
 
     stopGame = () => {
         this.setState({ isRunning: false })
+        if (this.timeoutHandler) {      
+            window.clearTimeout(this.timeoutHandler);      
+        }
+        this.timeoutHandler = null;
     }
 
     makeEmptyBoard() {
@@ -63,6 +68,48 @@ class Game extends React.Component {
             this.board[y][x] = !this.board[y][x];
         }
         this.setState({ cells: this.makeCells() })
+    }
+
+    runIteration() { 
+        let newBoard = this.makeEmptyBoard();
+        for (let y = 0; y < this.rows; y++) {
+            for (let x = 0; x < this.columns; x++) {
+                let neighbors = this.calculateNumberOfNeighbors(this.board, x, y);
+                if (this.board[y][x]) {
+                    if (neighbors === 2 || neighbors === 3) {
+                        newBoard[y][x] = true;
+                    } 
+                    else {
+                        newBoard[y][x] = false;
+                    }    
+                } else {      
+                    if (!this.board[y][x] && neighbors === 3) {       
+                         newBoard[y][x] = true;      
+                        }    
+                    }  
+                }
+            }
+        this.board = newBoard;
+        this.setState({ cells: this.makeCells() });
+        this.timeoutHandler = window.setTimeout(() => { 
+                 this.runIteration();    
+                }, this.state.interval); 
+    }
+
+
+
+    calculateNumberOfNeighbors(board, x, y) {
+        let neighbors = 0;
+        const dirs = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
+        for (let i = 0; i < dirs.length; i++) {
+            const dir = dirs[i];
+            let y1 = y + dir[0];
+            let x1 = x + dir[1];
+            if (x1 >= 0 && x1 < this.columns && y1 >= 0 && y1 < this.rows && board[y1][x1]) {
+                neighbors++;
+            }
+        }
+        return neighbors;
     }
 
     render() {
