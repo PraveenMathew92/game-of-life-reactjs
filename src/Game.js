@@ -120,8 +120,12 @@ class Game extends React.Component {
                     <input value={this.state.interval} style={{margin: '15px'}} onChange={this.updateInterval} />
 
                     { this.state.isRunning ? 
-                    <button className='button' style={{color: 'red'}} onClick={this.stopGame}>STOP</button> : 
-                        <button className='button' style={{color: 'green'}} onClick={this.startGame}>START</button> }
+                        <button className='button' style={{color: 'red'}} onClick={this.stopGame}>STOP</button>
+                    : <React.Fragment>                        
+                        <button className='button' style={{color: 'green'}} onClick={this.startGame}>START</button>
+                        <button onClick={()=> {this.board=this.makeEmptyBoard(); this.setState({cells: []})}}> CLEAR </button>
+                    </React.Fragment>
+                         }
                 </div>
 
                 <div className="Board" 
