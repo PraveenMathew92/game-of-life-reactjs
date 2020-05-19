@@ -1,5 +1,5 @@
 {
-  "name": "chain-reaction",
+  "name": "game-of-life",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,8 +7,13 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2"
+  },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "browserslist": {
     "production": [
