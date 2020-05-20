@@ -1,5 +1,5 @@
 import React from "react";
-import {CELL_SIZE} from './constants';
+import {CELL_SIZE} from '../constants';
 
 class Cell extends React.Component {
     render() {
