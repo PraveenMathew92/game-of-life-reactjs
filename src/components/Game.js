@@ -1,6 +1,6 @@
 import React from 'react';
-import './Game.css';
-import {CELL_SIZE, HEIGHT, WIDTH} from './constants';
+import '../../src/Game.css';
+import {CELL_SIZE, HEIGHT, WIDTH} from '../../src/constants';
 import Cell from './Cell';
 
 class Game extends React.Component {
