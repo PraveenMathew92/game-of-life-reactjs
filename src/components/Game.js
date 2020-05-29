@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../src/Game.css';
 import {CELL_SIZE, HEIGHT, WIDTH} from '../../src/constants';
-import Cell from './Cell';
+import Board from './Board';
 
 class Game extends React.Component {
     constructor() {
@@ -96,8 +96,6 @@ class Game extends React.Component {
                 }, this.state.interval); 
     }
 
-
-
     calculateNumberOfNeighbors(board, x, y) {
         let neighbors = 0;
         const dirs = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
@@ -127,15 +125,16 @@ class Game extends React.Component {
                     </React.Fragment>
                          }
                 </div>
+                <Board height={HEIGHT} width={WIDTH} cellSize={CELL_SIZE} />
 
-                <div className="Board" 
+                {/* <div className="Board" 
                     style={{ width: WIDTH, height: HEIGHT, backgroundSize: `${CELL_SIZE}px ${CELL_SIZE}px`}}  
                     onClick={this.handleClick}
                     ref={(n) => { this.boardRef = n; }}>
                 { this.state.cells.map(cell => (
                     <Cell x={cell.x} y={cell.y} key={`${cell.x},${cell.y}`} />
                 )) }
-                </div>
+                </div> */}
             </div>
         )
     }
